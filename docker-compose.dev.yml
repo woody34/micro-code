@@ -1,0 +1,23 @@
+version: '3.3'
+services:
+  microcode:
+    build:
+      context: .
+      dockerfile: ./Dockerfile.dev
+      args:
+        - http_proxy
+        - https_proxy
+        - no_proxy
+    image: 'micro-code/server:latest'
+    ports:
+      - '3000:3000'
+    volumes: 
+      - .:/code
+    stdin_open: true
+    tty: true
+  mongodb:
+    image: 'mongo:4.1'
+    ports:
+      - '27017:27017'
+    expose:
+      - "27017"
